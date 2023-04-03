@@ -82,6 +82,16 @@ class ComposerStaticIniteefffc4aad18ac63a177e16feb3fcccc
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'S' => 
+        array (
+            'Slim' => 
+            array (
+                0 => __DIR__ . '/..' . '/slim/middleware/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -96,6 +106,7 @@ class ComposerStaticIniteefffc4aad18ac63a177e16feb3fcccc
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticIniteefffc4aad18ac63a177e16feb3fcccc::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticIniteefffc4aad18ac63a177e16feb3fcccc::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticIniteefffc4aad18ac63a177e16feb3fcccc::$prefixesPsr0;
             $loader->classMap = ComposerStaticIniteefffc4aad18ac63a177e16feb3fcccc::$classMap;
 
         }, null, ClassLoader::class);

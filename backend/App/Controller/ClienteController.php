@@ -52,11 +52,12 @@ final class ClienteController {
     
     public function deleteCliente(Request $request, Response $response, array $args){
 
-        $data = $request->getParsedBody();
+        $id = $args['id'];
+    
 
-        $clienteDAO = new ClienteDAO;
+        $clienteDAO = new ClienteDAO();
         $cliente = new ClienteModel();
-        $cliente->setId($data['id']);
+        $cliente->setId($id);
         $clienteDAO->deleteCliente($cliente);
 
         $response->getBody()->write(json_encode(['message' => 'Cliente deletado com sucesso']));

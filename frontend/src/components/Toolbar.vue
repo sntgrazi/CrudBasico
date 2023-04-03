@@ -1,9 +1,8 @@
 <template>
     <div class="toolbar">
-        <h2>Team</h2>
+        <h2>Clientes</h2>
         <div class="button-group">
-            <button class="button" @click="()=>toggleForm()">Add</button>
-            <button class="button button-outline"> Export </button>
+            <button class="btn-adicionar" @click="()=>toggleForm()"><i class="fa-solid fa-plus"></i>Adicionar cliente</button>
         </div>
     </div>
 </template>
@@ -26,5 +25,25 @@
         color: #000;
         font-size: 32px;
         font-weight: 400;
+    }
+
+    .btn-adicionar{
+        width: 180px;
+        padding: 6px;
+        margin: 0 5px;
+        border: none;
+        font-size: 18px;
+        background-color: #000;
+        color:white;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .btn-adicionar:hover{
+        color: rgb(221, 115, 115);
+    }
+
+    .btn-adicionar > i {
+        margin: 5px;
     }
 </style>
