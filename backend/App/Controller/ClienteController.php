@@ -19,6 +19,22 @@ final class ClienteController {
         return $response->withHeader('Content-Type', 'application/json');
     }
 
+    public function getCliente(Request $request, Response $response, array $args)
+    {
+
+        $id = $args['id'];
+    
+        $clienteDAO = new ClienteDAO();
+        $clienteModel = new ClienteModel();
+        $clienteModel->setId($id);
+        $cliente = $clienteDAO->getCliente($clienteModel);
+
+        $response->getBody()->write(json_encode($cliente));
+        return $response->withHeader('Content-Type', 'application/json');
+        
+
+    }
+
     public function insertCliente(Request $request, Response $response, array $args)
     {
         $data = $request->getParsedBody();
@@ -37,17 +53,19 @@ final class ClienteController {
     
     public function updateCliente(Request $request, Response $response, array $args)
     {
+        $id = $args['id'];
         $data = $request->getParsedBody();
-        $clienteDAO = new ClienteDAO();
-        $cliente = new ClienteModel();
-        $cliente->setNome($data['nome'])
-             ->setEmail($data['email'])
-             ->setTelefone($data['telefone'])
-             ->setId($data['id']);
-        $clienteDAO->updateCliente($cliente);
 
-        $response->getBody()->write(json_encode(['message' => 'Cliente atualizado com sucesso']));
-        return  $response->withHeader('Content-Type', 'application/json');
+       $clienteDAO = new ClienteDAO();
+       $clienteModel = new ClienteModel();
+       $clienteModel->setId($id)
+                ->setNome($data['nome'])
+                ->setEmail($data['email'])
+                ->setTelefone($data['telefone']);
+       $clienteDAO->updateCliente($clienteModel);
+
+       $response->getBody()->write(json_encode(['message' => 'Cliente atualziado com sucesso']));
+       return  $response->withHeader('Content-Type', 'application/json');
     }
     
     public function deleteCliente(Request $request, Response $response, array $args){

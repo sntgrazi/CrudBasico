@@ -4,11 +4,18 @@
   </div>
   <main>
     <toolbar :toggleForm="toggleform" />
-    <team :clientes="clientes" @deletar-cliente="excluirCliente"/>
+    <team
+      :clientes="clientes"
+      @deletar-cliente="excluirCliente"
+      :toggleForm="toggleform"
+      :userId="userId"
+    />
     <clienteForm
       v-if="formActive"
       :toggleForm="toggleform"
       @cliente-adicionado="atualizarClientes"
+      :userId="userId"
+      @cliente-atualizado="atualizarClientes"
     />
   </main>
 </template>
@@ -31,16 +38,22 @@ export default {
   },
   setup() {
     const formActive = ref(false);
+    const userId = ref(false);
 
     const toggleform = (id = false) => {
       formActive.value = !formActive.value;
+      userId.value = false;
 
-      console.log(id);
+      if (id) {
+        userId.value = id;
+        console.log(userId.value);
+      }
     };
 
     return {
       formActive,
       toggleform,
+      userId,
     };
   },
   data() {
@@ -58,9 +71,21 @@ export default {
       }
     },
     excluirCliente(id) {
-      axios.delete(`http://localhost:84/delete/${id}`).then(() => {
-        this.atualizarClientes();
-        console.log(id);
+      swal({
+        text: "Você tem certeza que deseja deletar este cliente?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          axios.delete(`http://localhost:84/delete/${id}`).then(() => {
+            this.atualizarClientes();
+            console.log(id);
+          });
+          swal("Cliente deletado com sucesso", {
+            icon: "success",
+          });
+        }
       });
     },
   },

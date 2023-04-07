@@ -17,6 +17,18 @@ class ClienteDAO extends ConexaoDAO{
         return $clientes;
     }
 
+    
+    public function getCliente(ClienteModel $clienteM): array{
+        $sql = 'SELECT * from clientes WHERE id = :id';
+    
+        $stm = $this->pdo->prepare($sql);
+        $stm->execute([
+            'id' => $clienteM->getId()
+        ]);
+        $cliente = $stm->fetch(\PDO::FETCH_ASSOC);
+        return $cliente;
+    }
+
     public function insertCliente(ClienteModel $cliente): void {
         $sql = 'INSERT INTO clientes VALUES (null, :nome, :email, :telefone)';
 
@@ -31,7 +43,7 @@ class ClienteDAO extends ConexaoDAO{
     }
 
     public function updateCliente(ClienteModel $cliente): void {
-        $sql = 'UPDATE clientes SET nome = :nome, email = :email, telefone = :telefone WHERE id = :id)';
+        $sql = 'UPDATE clientes SET nome = :nome, email = :email, telefone = :telefone WHERE id = :id';
 
         $stm = $this->pdo->prepare($sql);
 
