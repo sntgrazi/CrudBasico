@@ -1,4 +1,4 @@
-# VueComSlim4
+#CRUD
 
 Esse projeto é um simples CRUD para aprender a integrar o Vue com o Slim4
 
