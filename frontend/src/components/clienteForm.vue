@@ -58,7 +58,7 @@ export default {
       email: "",
       telefone: "",
       user: {},
-      titulo: ""
+      titulo: "",
     };
   },
   methods: {
@@ -80,10 +80,10 @@ export default {
         this.email = "";
         this.telefone = "";
         swal({
-              text: "Cliente cadastrado com sucesso",
-              icon: "success",
-              button: "Ok",
-            });
+          text: "Cliente cadastrado com sucesso",
+          icon: "success",
+          button: "Ok",
+        });
         this.toggleForm(false);
       } catch (error) {
         console.error(error);
@@ -101,19 +101,22 @@ export default {
       }
     },
 
-    async editarForm(){
-        try{
-            const response = await axios.put(`http://localhost:84/update/${this.userId}`, this.user);
-            swal({
-              text: "Cliente Atualizado com sucesso!",
-              icon: "success",
-              button: "Ok",
-            });
-            this.$emit('cliente-atualizado')
-            this.toggleForm(false);
-        }catch(error){
-            console.error(error)
-        }
+    async editarForm() {
+      try {
+        const response = await axios.put(
+          `http://localhost:84/update/${this.userId}`,
+          this.user
+        );
+        swal({
+          text: "Cliente Atualizado com sucesso!",
+          icon: "success",
+          button: "Ok",
+        });
+        this.$emit("cliente-atualizado");
+        this.toggleForm(false);
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
   mounted() {
@@ -121,7 +124,7 @@ export default {
       this.getCliente();
       this.titulo = "Editar Cliente";
     } else {
-        this.titulo = "Cadastrar Cliente"
+      this.titulo = "Cadastrar Cliente";
     }
   },
 };

@@ -2,7 +2,6 @@
   <div class="team">
     <div class="team-members table">
       <div class="table-header table-row">
-        <div class="table-col">Id</div>
         <div class="table-col">Nome</div>
         <div class="table-col">Email</div>
         <div class="table-col">Telefone</div>
@@ -13,7 +12,6 @@
         v-for="cliente in clientes"
         :key="cliente.id"
       >
-        <div class="table-col name">{{ cliente.id }}</div>
         <div class="table-col name">{{ cliente.nome }}</div>
         <div class="table-col email">{{ cliente.email }}</div>
         <div class="table-col telefone">{{ cliente.telefone }}</div>
